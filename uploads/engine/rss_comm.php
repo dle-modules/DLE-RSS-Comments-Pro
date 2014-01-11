@@ -8,6 +8,8 @@ URL:    http://pafnuty.name/
 ICQ:    817233 
 email:  pafnuty10@gmail.com
 =============================================================================
+Файл:   rss_comm.php
+=============================================================================
 */
 
 define('DATALIFEENGINE', true);
@@ -20,7 +22,9 @@ define('ENGINE_DIR', dirname(__FILE__));
 @ini_set('error_reporting', E_ALL ^ E_WARNING ^ E_NOTICE);
 
 $newsid = (isset ($_REQUEST['newsid'])) ? intval($_REQUEST['newsid']) : false;
-if ($_REQUEST['newsid'] && $newsid <= '0') {
+$userid = (isset ($_REQUEST['userid'])) ? intval($_REQUEST['userid']) : false;
+
+if (($_REQUEST['newsid'] && $newsid <= '0') || ($_REQUEST['userid'] && $userid <= '0')) {
 	die('not_aviable');
 }
 
@@ -45,7 +49,7 @@ $rssContent = false;
 
 $config['allow_cache'] = true;
 
-$rssContent = dle_cache('rss', 'comments_' . $newsid);
+$rssContent = dle_cache('rss', 'comments_' . $newsid . $userid);
 
 if (!$rssContent) {
 
@@ -216,6 +220,9 @@ XML;
 	if ($newsid) {
 		$where[] = PREFIX . "_post.id = '" . $newsid . "'";
 	}
+	if ($userid) {
+		$where[] = PREFIX . "_comments.user_id = '" . $userid . "'";
+	}
 
 	if (count($where)) {
 		$where = implode(" AND ", $where);
@@ -247,12 +254,16 @@ XML;
 			LIMIT 0, " . $config['rss_comm_number']
 			, true
 		);
+		
 	}
 
 	$i = 1;
 	if (count($comments) > 0) {
 
 		if ($newsid) {
+			$config['home_title'] = htmlspecialchars(strip_tags(stripslashes($news['title'])), ENT_QUOTES, $config['charset']) . ' - ' . $config['home_title'];
+		}
+		elseif ($userid) {
 			$config['home_title'] = htmlspecialchars(strip_tags(stripslashes($news['title'])), ENT_QUOTES, $config['charset']) . ' - ' . $config['home_title'];
 		}
 		else {
@@ -268,7 +279,8 @@ XML;
 					'alt_name' => $commItem['alt_name'],
 					'i'        => $i
 				);
-				$commLink = getUrl($news) . '#comment-id-' . $commItem['id'];
+				$commLink = $config['http_home_url'] . '?' . $cstart . 'do=lastcomments' . $_uId. '#comment-id-' . $commItem['id'];
+				$commLink = getUrl($news) . $_uId . '#comment-id-' . $commItem['id'];
 				$commItem['text'] = parseText($commItem['text']);
 				$news['category'] = intval($news['category']);
 
@@ -283,6 +295,24 @@ XML;
 					)
 				);
 
+			} elseif ($userid) {
+				$cstart = ($i > $config['comm_nummers']) ? 'cstart=' . ceil($i / $config['comm_nummers']) . '&amp;' : '';
+
+				$commLink = $config['http_home_url'] . '?' . $cstart . 'do=lastcomments&amp;userid-' . $commItem['user_id'] . '#comment-id-' . $commItem['id'];
+
+				$commItem['text'] = parseText($commItem['text']);
+				$commItem['category'] = intval($commItem['category']);
+
+				$rssItems .= getItem(
+					array(
+						'title'       => 'Комментаий №' . $commItem['id'] . ' [' . $commItem['title'] . ']',
+						'link'        => $commLink,
+						'description' => $commItem['text'],
+						'category'    => get_url($commItem['category']),
+						'creator'     => $commItem['autor'],
+						'date'        => $commItem['date']
+					)
+				);
 			}
 			else {
 
@@ -360,7 +390,7 @@ XML;
 	</channel>
 </rss>';
 
-	create_cache('rss', $rssContent, 'comments_' . $newsid);
+	create_cache('rss', $rssContent, 'comments_' . $newsid . $userid);
 }
 header('Content-type: application/xml');
 echo $rssContent;

@@ -28,7 +28,7 @@ $cfg = array(
 	'moduleDescr'   => 'Модуль показа RSS ленты комментариев к новостям и всех последних комментариев',
 
 	// Версия модуля, для установщика
-	'moduleVersion' => '1.0',
+	'moduleVersion' => '1.1',
 
 	// Дата выпуска модуля, для установщика
 	'moduleDate'    => '11.01.2014',
@@ -60,14 +60,16 @@ $steps = <<<HTML
 	<ol>
 		<li>
 			Открыть файл <b class="red">.htaccess</b> (он в корне сайта) и в самый конец добавить:
-			<textarea readonly>RewriteRule ^rss_comm.xml$ engine/rss_comm.php [L]
+			<textarea readonly># RSS Comments Pro
+RewriteRule ^rss_comm.xml$ engine/rss_comm.php [L]
+RewriteRule ^rss_comm_u_(.*).xml engine/rss_comm.php?userid=$1 [L]
 RewriteRule ^rss_comm_(.*).xml engine/rss_comm.php?newsid=$1 [L]</textarea>
 		</li>
 		<li>
 			Открыть файл <b class="red">engine/data/config.php</b>, найти код:
 			<textarea readonly>'version_id' => "{$config['version_id']}",</textarea>
 			Ниже добавить:
-			<textarea readonly>'rss_comm_number' => '1',
+			<textarea readonly>'rss_comm_number' => '15',
 
 'allow_rss_comm' => 'yes',
 

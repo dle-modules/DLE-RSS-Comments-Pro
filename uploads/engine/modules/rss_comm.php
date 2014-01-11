@@ -14,11 +14,15 @@ if (!defined('DATALIFEENGINE')) {
 	die("Go fuck yourself!");
 }
 
+$loginName = $db->safesql(strip_tags(stripcslashes($_REQUEST['user'])));
+
 $cfg = array(
 	'newsId'      => ($_REQUEST['newsid']) ? (int)$_REQUEST['newsid'] : false,
+	'userName'    => ($_REQUEST['user']) ? $loginName : false,
 	'cachePrefix' => !empty($cachePrefix) ? $cachePrefix : 'r_s_s_comm',
 	'cacheSuffix' => !empty($cacheSuffix) ? $cacheSuffix : false
 );
+
 $cacheName = md5(implode('_', $cfg));
 $rssCommMeta = false;
 $rssCommMeta = dle_cache($cfg['cachePrefix'], $cacheName . $config['skin'], $cfg['cacheSuffix']);
@@ -31,11 +35,22 @@ if (!$rssCommMeta) {
 		$rsQuery = $db->super_query("SELECT id, title FROM " . PREFIX . "_post WHERE id = '" . $cfg['newsId'] . "'");
 
 		if ($rsQuery['id']) {
-			$rssCommTitle = '[комментарии] ' . stripslashes($rsQuery['title']);
+			$rssCommTitle = '[Комментарии] ' . stripslashes($rsQuery['title']);
 			$newsIdAltUrl = '_' . $cfg['newsId'];
 			$newsIdNotAltUrl = '?newsid=' . $cfg['newsId'];
 		}
 	}
+
+	if ($cfg['userName']) {
+		$rsQuery = $db->super_query("SELECT user_id, name, comm_num FROM " . USERPREFIX . "_users WHERE name = '" . $cfg['userName'] . "'");
+
+		if ($rsQuery['user_id'] && $rsQuery['comm_num'] > 0) {
+			$rssCommTitle = 'Комментарии пользователя ' . stripslashes($rsQuery['name']);
+			$newsIdAltUrl = '_u_' . $rsQuery['user_id'];
+			$newsIdNotAltUrl = '?newsid=' . $rsQuery['user_id'];
+		}
+	}
+
 
 	if ($config['allow_alt_url'] == "yes") {
 		$rssCommUrl = $config['http_home_url'] . 'rss_comm' . $newsIdAltUrl . '.xml';
