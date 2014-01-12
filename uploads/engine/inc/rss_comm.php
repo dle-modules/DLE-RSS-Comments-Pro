@@ -1,4 +1,16 @@
 <?php
+/*
+=============================================================================
+RSS comments Pro - RSS для комментариев в DLE 9.x и выше
+=============================================================================
+Автор:   ПафНутиЙ 
+URL:     http://pafnuty.name/
+twitter: https://twitter.com/pafnuty_name
+google+: http://gplus.to/pafnuty
+email:   pafnuty10@gmail.com
+=============================================================================
+*/ 
+
 if(!defined('DATALIFEENGINE') OR !defined('LOGGED_IN')) {
 	die("Hacking attempt!");
 }
@@ -22,13 +34,13 @@ $cfg = array(
 	'moduleTitle'   => 'RSS Comments Pro',
 
 	// Описание модуля, для установщика и админки.
-	'moduleDescr'   => 'Модуль показа RSS ленты комментариев к новостям и всех последних комментариев',
+	'moduleDescr'   => 'Модуль для организации RSS ленты комментариев на сайте',
 
 	// Версия модуля, для установщика
-	'moduleVersion' => '1.1',
+	'moduleVersion' => '1.2',
 
 	// Дата выпуска модуля, для установщика
-	'moduleDate'    => '11.01.2014',
+	'moduleDate'    => '12.01.2014',
 
 	// Версии DLE, поддержваемые модулем, для установщика
 	'dleVersion'    => '9.x - 10.x',
@@ -257,7 +269,13 @@ HTML;
 			echo $output;
 		?>
 
-	<div>Автор модуля: <a href="http://pafnuty.name/" target="_blank">ПафНутиЙ</a> <br> ICQ: 817233 <br> <a href="mailto:pafnuty10@gmail.com">pafnuty10@gmail.com</a></div>
+	<div>
+		Информация об авторе: <br>
+		<a href="http://pafnuty.name/" target="_blank" title="Сайт автора">ПафНутиЙ</a> <br>
+		<a href="https://twitter.com/pafnuty_name" target="_blank" title="Twitter">@pafnuty_name</a> <br>
+		<a href="http://gplus.to/pafnuty" target="_blank" title="google+">+Павел</a> <br>
+		<a href="mailto:pafnuty10@gmail.com" title="email автора">pafnuty10@gmail.com</a>
+	</div>
 	</section> 	
 </body>
 </html>

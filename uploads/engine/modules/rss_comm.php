@@ -3,12 +3,14 @@
 =============================================================================
 RSS comments Pro - RSS для комментариев в DLE 9.x и выше (компонент вывода метатегов RSS)
 =============================================================================
-Автор:  ПафНутиЙ 
-URL:    http://pafnuty.name/
-ICQ:    817233 
-email:  pafnuty10@gmail.com
+Автор:   ПафНутиЙ 
+URL:     http://pafnuty.name/
+twitter: https://twitter.com/pafnuty_name
+google+: http://gplus.to/pafnuty
+email:   pafnuty10@gmail.com
 =============================================================================
-*/
+*/ 
+
 
 if (!defined('DATALIFEENGINE')) {
 	die("Go fuck yourself!");

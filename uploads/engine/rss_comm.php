@@ -3,14 +3,14 @@
 =============================================================================
 RSS Comments Pro - RSS для комментариев в DLE 9.x и выше
 =============================================================================
-Автор:  ПафНутиЙ 
-URL:    http://pafnuty.name/
-ICQ:    817233 
-email:  pafnuty10@gmail.com
+Автор:   ПафНутиЙ 
+URL:     http://pafnuty.name/
+twitter: https://twitter.com/pafnuty_name
+google+: http://gplus.to/pafnuty
+email:   pafnuty10@gmail.com
 =============================================================================
-Файл:   rss_comm.php
-=============================================================================
-*/
+*/ 
+
 
 define('DATALIFEENGINE', true);
 define('ROOT_DIR', '..');
