@@ -286,7 +286,7 @@ XML;
 
 				$rssItems .= getItem(
 					array(
-						'title'       => 'Комментаий №' . $commItem['id'] . ' [' . $commItem['title'] . ']',
+						'title'       => 'Комментарий №' . $commItem['id'] . ' [' . $commItem['title'] . ']',
 						'link'        => $commLink,
 						'description' => $commItem['text'],
 						'category'    => get_url($news['category']),
@@ -305,7 +305,7 @@ XML;
 
 				$rssItems .= getItem(
 					array(
-						'title'       => 'Комментаий №' . $commItem['id'] . ' [' . $commItem['title'] . ']',
+						'title'       => 'Комментарий №' . $commItem['id'] . ' [' . $commItem['title'] . ']',
 						'link'        => $commLink,
 						'description' => $commItem['text'],
 						'category'    => get_url($commItem['category']),
@@ -325,7 +325,7 @@ XML;
 
 				$rssItems .= getItem(
 					array(
-						'title'       => 'Комментаий №' . $commItem['id'] . ' [' . $commItem['title'] . ']',
+						'title'       => 'Комментарий №' . $commItem['id'] . ' [' . $commItem['title'] . ']',
 						'link'        => $commLink,
 						'description' => $commItem['text'],
 						'category'    => get_url($commItem['category']),
