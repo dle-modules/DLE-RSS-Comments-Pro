@@ -13,3 +13,6 @@ RSS Comments Pro - rss-лента комментариев для DLE
 
 
   [1]: https://dl.dropboxusercontent.com/u/8142395/Screenshot_5.png
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pafnuty/dle-rss-comments-pro/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
