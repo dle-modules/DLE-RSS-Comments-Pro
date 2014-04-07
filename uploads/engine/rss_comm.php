@@ -100,7 +100,7 @@ XML;
 				$page = 'page,1,' . ceil($news['i'] / $config['comm_nummers']) . ',';
 			}
 
-			if ($config['allow_alt_url'] == "yes") {
+			if ($config['allow_alt_url'] && $config['allow_alt_url'] != 'no') {
 				if ($condition = $config['seo_type'] == 1 OR $config['seo_type'] == 2) {
 					if ($news['category'] and $config['seo_type'] == 2) {
 						$url = $config['http_home_url'] . get_url($news['category']) . "/" . $page . $news['id'] . "-" . $news['alt_name'] . ".html";
@@ -364,7 +364,7 @@ XML;
 		<generator>DataLife Engine</generator>
 XML;
 
-	if ($config['site_offline'] == "yes" or $config['allow_rss_comm'] == 'no') {
+	if (($config['site_offline'] && $config['site_offline'] != 'no') or $config['allow_rss_comm'] == 'no') {
 
 		$rssItems .= getItem(
 			array(

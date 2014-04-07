@@ -54,7 +54,7 @@ if (!$rssCommMeta) {
 	}
 
 
-	if ($config['allow_alt_url'] == "yes") {
+	if ($config['allow_alt_url'] && $config['allow_alt_url'] != 'no') {
 		$rssCommUrl = $config['http_home_url'] . 'rss_comm' . $newsIdAltUrl . '.xml';
 	}
 	else {
